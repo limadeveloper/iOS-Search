@@ -2,192 +2,143 @@
 //  ViewController.m
 //  SearchBothiOS7AndiOS8
 //
-//  Created by John Silva on 5/24/15.
-//  Copyright (c) 2015 John Silva. All rights reserved.
+//  Created by John Lima on 5/24/15.
+//  Copyright (c) 2015 limadeveloper. All rights reserved.
 //
 
 #import "ViewController.h"
 
-#define DATA @"http://restcountries.eu/rest/v1/all"
-
-@interface ViewController ()
+@interface ViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating>
 
 @end
 
 @implementation ViewController
 
-- (void)viewDidLoad {
+#pragma mark - Properties
+BOOL searchEnable = NO;
+UISearchController *searchController;
+NSArray *tableData;
+NSArray *searchData;
+NSIndexPath *selectedIndexPath;
+
+#pragma mark - View LifeCycle
+-(void)viewDidLoad {
     [super viewDidLoad];
     
-    self.table.delegate = self;
-    self.table.dataSource = self;
-    
     [self getData];
+    [self updateUI];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0) {
-        NSLog(@"iOS 7");
-        [self createSearchiOS7];
-    }else {
-        NSLog(@"iOS 8");
-        [self createSearchiOS8];
+    if (searchEnable) {
+        [self searchBarCancelButtonClicked:searchController.searchBar];
+        [self clearSearch];
     }
-    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+#pragma mark - Actions
+-(void)updateUI {
+    
+    UIView *footer = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    self.tableView.tableFooterView = footer;
+    self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.allowsSelection = tableData.count > 0;
+    
+    [self.tableView reloadData];
 }
 
-#pragma mark-
-#pragma mark- methods ios 8
-- (void)createSearchiOS8 {
-    
-    // search controller
-    self.searchControlleriOS8 = [[UISearchController alloc] initWithSearchResultsController:nil];
-    self.searchControlleriOS8.searchResultsUpdater = self;
-    self.searchControlleriOS8.dimsBackgroundDuringPresentation = NO;
-    self.searchControlleriOS8.hidesNavigationBarDuringPresentation = NO;
-    [self.searchControlleriOS8.searchBar sizeToFit];
-    self.searchControlleriOS8.searchBar.placeholder = @"Search in iOS 8";
-    self.searchControlleriOS8.searchBar.tintColor = [UIColor whiteColor];
-    self.searchControlleriOS8.searchBar.delegate = self;
-    [self.viewSearch addSubview:self.searchControlleriOS8.searchBar];
-    
+-(void)getData {
+
 }
+
+-(void)createSearch {
+    
+    searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    searchController.searchResultsUpdater = self;
+    
+    [searchController.searchBar sizeToFit];
+    [searchController.searchBar setBarTintColor:[UIColor purpleColor]];
+    [searchController.searchBar setTintColor:[UIColor whiteColor]];
+    
+    [self.viewSearch addSubview:searchController.searchBar];
+    
+    searchController.delegate = self;
+    searchController.dimsBackgroundDuringPresentation = false;
+    searchController.hidesNavigationBarDuringPresentation = false;
+    searchController.searchBar.delegate = self;
+}
+
+-(void)clearSearch {
+    
+    searchData = @[];
+    searchEnable = NO;
+    
+    [self.tableView reloadData];
+}
+
+#pragma mark - Search Delegates
 
 -(void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    
     NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[c] %@", searchController.searchBar.text];
-    NSArray *array = [self.resultsTable filteredArrayUsingPredicate:searchPredicate];
-    self.resultsSearch = array;
+    NSArray *array = [tableData filteredArrayUsingPredicate:searchPredicate];
     
-    NSLog(@"ARRAY: %@", self.resultsSearch);
-    [self.table reloadData];
+    searchData = array;
+    searchEnable = YES;
+    
+    [self.tableView reloadData];
 }
 
-#pragma mark-
-#pragma mark- methods ios 7
-- (void)createSearchiOS7 {
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     
-    // search bar
-    self.searchBariOS7 = [[UISearchBar alloc] init];
-    [self.searchBariOS7 sizeToFit];
-    self.searchBariOS7.placeholder = @"Search in iOS 7";
-    self.searchBariOS7.delegate = self;
-    [self.viewSearch addSubview:self.searchBariOS7];
+    searchBar.text = nil;
+    searchBar.showsCancelButton = NO;
     
-    // search display controller
-    self.searchDisplayControlleriOS7 = [[UISearchDisplayController alloc] initWithSearchBar:self.searchBariOS7 contentsController:nil];
-    self.searchDisplayControlleriOS7.searchResultsDataSource = self;
-    self.searchDisplayControlleriOS7.searchResultsDelegate = self;
+    [searchBar resignFirstResponder];
     
+    self.tableView.allowsSelection = YES;
 }
 
-- (void)updateSearchResultsForSearchDisplayController:(UISearchBar *)searchBar {
-    NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[c] %@", searchBar.text];
-    NSArray *array = [self.resultsTable filteredArrayUsingPredicate:searchPredicate];
-    self.resultsSearch = array;
-    
-    NSLog(@"ARRAY: %@", self.resultsSearch);
-    [self.table reloadData];
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [self searchBarCancelButtonClicked:searchBar];
 }
 
-#pragma mark-
-#pragma mark- table view datasource
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+-(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [self clearSearch];
+    self.tableView.allowsSelection = false;
+    searchBar.showsCancelButton = YES;
 }
+
+#pragma mark - TableView DataSource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0) {
-        // ios 7
-        if (self.searchid == 1) {
-            return self.resultsSearch.count;
-        }
-    }else {
-        // ios 8
-        if (self.searchControlleriOS8.active) {
-            return self.resultsSearch.count;
-        }
-    }
-    return self.resultsTable.count;
+    NSArray *data = searchEnable ? searchData : tableData;
+    return data.count;
 }
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [self.table dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0) {
-        // ios 7
-        if (self.searchid == 1) {
-            cell.textLabel.text = [self.resultsSearch objectAtIndex:indexPath.row];
-            cell.textLabel.textColor = [UIColor redColor];
-        }else {
-            cell.textLabel.text = [self.resultsTable objectAtIndex:indexPath.row];
-            cell.textLabel.textColor = [UIColor blackColor];
-        }
-    }else {
-        // ios 8
-        if (self.searchControlleriOS8.active) {
-            cell.textLabel.text = [self.resultsSearch objectAtIndex:indexPath.row];
-            cell.textLabel.textColor = [UIColor orangeColor];
-        }else {
-            cell.textLabel.text = [self.resultsTable objectAtIndex:indexPath.row];
-            cell.textLabel.textColor = [UIColor blackColor];
-        }
+    NSArray *data = searchEnable ? searchData : tableData;
+    
+    if (data.count > 0) {
+        //FIXME: do something here
     }
     
     return cell;
 }
 
-#pragma mark-
-#pragma mark- table view delegate
+#pragma mark - TableView Delegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.table deselectRowAtIndexPath:indexPath animated:YES];
-}
-
-#pragma mark-
-#pragma mark- search bar delegate
--(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
-    NSLog(@"begin editing");
-    searchBar.tintColor = [UIColor whiteColor];
-    self.resultsSearch = nil;
-    self.searchid = 1;
-    [self.table reloadData];
-    return YES;
-}
--(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    NSLog(@"search button clicked");
-}
--(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    NSLog(@"cancel button clicked");
-    self.searchid = 0;
-    [self.table reloadData];
-}
--(BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    NSLog(@"text in range");
-    NSLog(@"%@", searchBar.text);
-    [self updateSearchResultsForSearchDisplayController:searchBar];
-    return YES;
-}
-
-#pragma mark-
-#pragma mark- methods
-- (void)getData {
     
-    NSURL *url = [NSURL URLWithString:DATA];
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    NSError *error;
-    NSArray *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    self.resultsTable = [[NSMutableArray alloc] init];
-    if (error == nil) {
-        for (int i=0; i<json.count; i++) {
-            NSString *name = [[json objectAtIndex:i] objectForKey:@"name"];
-            [self.resultsTable insertObject:name atIndex:i];
-        }
-        //NSLog(@"JSON: %@", json);
-        [self.table reloadData];
-    }else {
-        NSLog(@"Error: %@", error);
-    }
+    [searchController setActive:NO];
     
+    selectedIndexPath = indexPath;
 }
 
 @end
