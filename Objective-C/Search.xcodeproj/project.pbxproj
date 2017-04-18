@@ -42,8 +42,8 @@
 		097BEADA1B121F0B002F8D78 = {
 			isa = PBXGroup;
 			children = (
-				097BEAE41B121F0B002F8D78 /* Products */,
 				097BEAE51B121F0B002F8D78 /* Search */,
+				097BEAE41B121F0B002F8D78 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,11 +58,10 @@
 		097BEAE51B121F0B002F8D78 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				CEA3A4EF1EA6AA8000CB23D1 /* UI */,
 				CEA3A4F01EA6AA9600CB23D1 /* Controller */,
 				097BEAE61B121F0B002F8D78 /* Support */,
-				CEA3A4EF1EA6AA8000CB23D1 /* UI */,
 			);
-			name = Search;
 			path = Search;
 			sourceTree = "<group>";
 		};
@@ -71,11 +70,10 @@
 			children = (
 				097BEAEA1B121F0B002F8D78 /* AppDelegate.h */,
 				097BEAEB1B121F0B002F8D78 /* AppDelegate.m */,
-				097BEAF31B121F0B002F8D78 /* Images.xcassets */,
-				097BEAE71B121F0B002F8D78 /* Info.plist */,
 				097BEAE81B121F0B002F8D78 /* main.m */,
+				097BEAE71B121F0B002F8D78 /* Info.plist */,
+				097BEAF31B121F0B002F8D78 /* Images.xcassets */,
 			);
-			name = Support;
 			path = Support;
 			sourceTree = "<group>";
 		};
@@ -85,7 +83,6 @@
 				CEA3A4EC1EA6AA6E00CB23D1 /* LaunchScreen.storyboard */,
 				097BEAF01B121F0B002F8D78 /* Main.storyboard */,
 			);
-			name = UI;
 			path = UI;
 			sourceTree = "<group>";
 		};
@@ -95,7 +92,6 @@
 				097BEAED1B121F0B002F8D78 /* ViewController.h */,
 				097BEAEE1B121F0B002F8D78 /* ViewController.m */,
 			);
-			name = Controller;
 			path = Controller;
 			sourceTree = "<group>";
 		};
@@ -290,7 +286,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = Search/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.limadeveloper.tests.search;
@@ -303,7 +298,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = Search/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.limadeveloper.tests.search;
