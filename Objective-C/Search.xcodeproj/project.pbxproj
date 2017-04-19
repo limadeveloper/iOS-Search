@@ -13,6 +13,7 @@
 		097BEAF21B121F0B002F8D78 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 097BEAF01B121F0B002F8D78 /* Main.storyboard */; };
 		097BEAF41B121F0B002F8D78 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 097BEAF31B121F0B002F8D78 /* Images.xcassets */; };
 		82A985001EA70416009A5939 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A984FF1EA70416009A5939 /* Model.m */; };
+		CE23691A1EA79E9B00F1E96C /* DefaultNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2369191EA79E9B00F1E96C /* DefaultNavigationController.m */; };
 		CEA3A4EE1EA6AA6E00CB23D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEA3A4EC1EA6AA6E00CB23D1 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,8 @@
 		097BEAF31B121F0B002F8D78 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		82A984FE1EA70416009A5939 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Model.h; path = Model/Model.h; sourceTree = "<group>"; };
 		82A984FF1EA70416009A5939 /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Model.m; path = Model/Model.m; sourceTree = "<group>"; };
+		CE2369181EA79E9B00F1E96C /* DefaultNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultNavigationController.h; sourceTree = "<group>"; };
+		CE2369191EA79E9B00F1E96C /* DefaultNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultNavigationController.m; sourceTree = "<group>"; };
 		CEA3A4ED1EA6AA6E00CB23D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +105,8 @@
 		CEA3A4F01EA6AA9600CB23D1 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CE2369181EA79E9B00F1E96C /* DefaultNavigationController.h */,
+				CE2369191EA79E9B00F1E96C /* DefaultNavigationController.m */,
 				097BEAED1B121F0B002F8D78 /* ViewController.h */,
 				097BEAEE1B121F0B002F8D78 /* ViewController.m */,
 			);
@@ -135,12 +140,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0830;
-				ORGANIZATIONNAME = "John Silva";
+				ORGANIZATIONNAME = "John Lima";
 				TargetAttributes = {
 					097BEAE21B121F0B002F8D78 = {
 						CreatedOnToolsVersion = 6.3.2;
-						DevelopmentTeam = G9572JBENB;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -183,6 +187,7 @@
 				097BEAEF1B121F0B002F8D78 /* ViewController.m in Sources */,
 				097BEAEC1B121F0B002F8D78 /* AppDelegate.m in Sources */,
 				097BEAE91B121F0B002F8D78 /* main.m in Sources */,
+				CE23691A1EA79E9B00F1E96C /* DefaultNavigationController.m in Sources */,
 				82A985001EA70416009A5939 /* Model.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -302,8 +307,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = G9572JBENB;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Search/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.limadeveloper.tests.search;
@@ -317,8 +322,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = G9572JBENB;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Search/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.limadeveloper.tests.search;

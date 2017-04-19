@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "Model.h"
 
 @interface ViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating>
 
@@ -18,12 +19,16 @@
 BOOL searchEnable = NO;
 UISearchController *searchController;
 NSArray *tableData;
-NSArray *searchData;
+NSMutableArray *searchData;
 NSIndexPath *selectedIndexPath;
+UIRefreshControl *refreshControl;
 
 #pragma mark - View LifeCycle
 -(void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self createSearch];
+    [self setupRefresh];
     
     [self getData];
     [self updateUI];
@@ -46,17 +51,29 @@ NSIndexPath *selectedIndexPath;
     self.tableView.tableFooterView = footer;
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.allowsSelection = tableData.count > 0;
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
     
     [self.tableView reloadData];
 }
 
 -(void)getData {
-
+    
+    Model *model = [[Model alloc] init];
+    
+    tableData = [[NSArray alloc] init];
+    tableData = [model getData];
+    
+    [refreshControl endRefreshing];
+    [self.tableView reloadData];
 }
 
 -(void)createSearch {
     
     searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    
+    [searchController loadViewIfNeeded];
+    
     searchController.searchResultsUpdater = self;
     
     [searchController.searchBar sizeToFit];
@@ -71,23 +88,50 @@ NSIndexPath *selectedIndexPath;
     searchController.searchBar.delegate = self;
 }
 
+-(void)setupRefresh {
+    
+    refreshControl = [[UIRefreshControl alloc] init];
+    refreshControl.tintColor = [UIColor purpleColor];
+    
+    [refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
+    
+    [self.tableView addSubview:refreshControl];
+}
+
 -(void)clearSearch {
     
-    searchData = @[];
+    searchData = [[NSMutableArray alloc] init];
     searchEnable = NO;
     
     [self.tableView reloadData];
+}
+
+-(void)refreshData {
+    [self getData];
+    [self updateUI];
+    [self clearSearch];
 }
 
 #pragma mark - Search Delegates
 
 -(void)updateSearchResultsForSearchController:(UISearchController *)searchController {
     
-    NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[c] %@", searchController.searchBar.text];
-    NSArray *array = [tableData filteredArrayUsingPredicate:searchPredicate];
+    NSString *searchText = searchController.searchBar.text;
     
-    searchData = array;
-    searchEnable = YES;
+    if (searchText == nil) {
+        searchData = [[NSMutableArray alloc] init];
+    }else {
+    
+        searchData = [[NSMutableArray alloc] init];
+        
+        for (Model *model in tableData) {
+            if ([model.name containsString:searchText]) {
+                [searchData addObject:model];
+            }
+        }
+    }
+    
+    searchEnable = searchController.searchBar.showsCancelButton;
     
     [self.tableView reloadData];
 }
@@ -125,7 +169,8 @@ NSIndexPath *selectedIndexPath;
     NSArray *data = searchEnable ? searchData : tableData;
     
     if (data.count > 0) {
-        //FIXME: do something here
+        cell.textLabel.text = [(Model *)data[indexPath.row] name];
+        cell.textLabel.textColor = [UIColor purpleColor];
     }
     
     return cell;
