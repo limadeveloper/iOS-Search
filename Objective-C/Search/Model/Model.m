@@ -25,7 +25,7 @@
 
 -(NSArray *)getData {
     return @[[[Model alloc] initWithName:@"Yoda" andPhoto:@"" andCode:1],
-             [[Model alloc] initWithName:@"Luki" andPhoto:@"" andCode:2],
+             [[Model alloc] initWithName:@"Luki Skywalker" andPhoto:@"" andCode:2],
              [[Model alloc] initWithName:@"Obi-Wan Kenobi" andPhoto:@"" andCode:3],
              [[Model alloc] initWithName:@"Anakin Skywalker" andPhoto:@"" andCode:4],
              [[Model alloc] initWithName:@"Quinlan Vos" andPhoto:@"" andCode:5],

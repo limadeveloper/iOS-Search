@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Ogj-vF-pYg">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Search-->
+        <scene sceneID="uZX-aX-mcS">
+            <objects>
+                <viewController id="q9a-hn-aHg" customClass="ViewController" customModule="Search" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="R9q-EH-V9F"/>
+                        <viewControllerLayoutGuide type="bottom" id="ujH-Hj-aFv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pdW-xk-BAh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="light-sabers" translatesAutoresizingMaskIntoConstraints="NO" id="dFY-z1-v2j">
+                                <rect key="frame" x="0.0" y="64" width="320" height="144"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="144" id="mgs-ik-8A3"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ovp-sP-Dcf">
+                                <rect key="frame" x="0.0" y="208" width="320" height="44"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="XsE-Pk-yQC"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="DYC-gk-3UY">
+                                <rect key="frame" x="0.0" y="253" width="320" height="315"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="50" id="eD0-Oz-oIB">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eD0-Oz-oIB" id="7YK-p7-bd1">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ovp-sP-Dcf" firstAttribute="leading" secondItem="dFY-z1-v2j" secondAttribute="leading" id="4sg-Po-sLe"/>
+                            <constraint firstItem="ovp-sP-Dcf" firstAttribute="trailing" secondItem="dFY-z1-v2j" secondAttribute="trailing" id="741-sC-kOI"/>
+                            <constraint firstItem="ovp-sP-Dcf" firstAttribute="top" secondItem="dFY-z1-v2j" secondAttribute="bottom" id="Kpy-Qr-2Aq"/>
+                            <constraint firstItem="dFY-z1-v2j" firstAttribute="leading" secondItem="pdW-xk-BAh" secondAttribute="leading" id="LUX-7B-QMf"/>
+                            <constraint firstItem="DYC-gk-3UY" firstAttribute="trailing" secondItem="ovp-sP-Dcf" secondAttribute="trailing" id="X1x-1Y-AqY"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="DYC-gk-3UY" secondAttribute="bottom" id="bct-pH-Svj"/>
+                            <constraint firstItem="DYC-gk-3UY" firstAttribute="top" secondItem="ovp-sP-Dcf" secondAttribute="bottom" constant="1" id="hzP-7p-nN8"/>
+                            <constraint firstItem="DYC-gk-3UY" firstAttribute="leading" secondItem="ovp-sP-Dcf" secondAttribute="leading" id="ibK-tE-lCH"/>
+                            <constraint firstItem="dFY-z1-v2j" firstAttribute="top" secondItem="R9q-EH-V9F" secondAttribute="bottom" id="uZZ-gQ-ho3"/>
+                            <constraint firstAttribute="trailing" secondItem="dFY-z1-v2j" secondAttribute="trailing" id="vXo-0h-3ui"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Search" id="DiI-1I-Bhc"/>
+                    <connections>
+                        <outlet property="tableView" destination="DYC-gk-3UY" id="HLR-qx-q8P"/>
+                        <outlet property="viewSearch" destination="ovp-sP-Dcf" id="4eC-Gg-ckV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V39-2D-u6y" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1028" y="-327"/>
+        </scene>
+        <!--Default Navigation Controller-->
+        <scene sceneID="qd1-rS-4aT">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ogj-vF-pYg" customClass="DefaultNavigationController" customModule="Search" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2uq-pR-kmd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="q9a-hn-aHg" kind="relationship" relationship="rootViewController" id="TAM-6T-LHE"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yd1-TQ-cnD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="302" y="-327"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="light-sabers" width="780" height="344"/>
+    </resources>
+</document>

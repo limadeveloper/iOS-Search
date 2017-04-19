@@ -21,7 +21,7 @@ UISearchController *searchController;
 NSArray *tableData;
 NSMutableArray *searchData;
 NSIndexPath *selectedIndexPath;
-UIRefreshControl *refreshControl;
+UIRefreshControl *refreshControll;
 
 #pragma mark - View LifeCycle
 -(void)viewDidLoad {
@@ -64,7 +64,7 @@ UIRefreshControl *refreshControl;
     tableData = [[NSArray alloc] init];
     tableData = [model getData];
     
-    [refreshControl endRefreshing];
+    [refreshControll endRefreshing];
     [self.tableView reloadData];
 }
 
@@ -90,12 +90,12 @@ UIRefreshControl *refreshControl;
 
 -(void)setupRefresh {
     
-    refreshControl = [[UIRefreshControl alloc] init];
-    refreshControl.tintColor = [UIColor purpleColor];
+    refreshControll = [[UIRefreshControl alloc] init];
+    refreshControll.tintColor = [UIColor purpleColor];
     
-    [refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
+    [refreshControll addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
     
-    [self.tableView addSubview:refreshControl];
+    [self.tableView addSubview:refreshControll];
 }
 
 -(void)clearSearch {
@@ -152,7 +152,7 @@ UIRefreshControl *refreshControl;
 
 -(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     [self clearSearch];
-    self.tableView.allowsSelection = false;
+    self.tableView.allowsSelection = NO;
     searchBar.showsCancelButton = YES;
 }
 
