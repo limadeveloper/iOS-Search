@@ -10,9 +10,8 @@
 
 ### Images
 <p align="center">
-<img src="https://github.com/limadeveloper/iOS-Search/blob/master/Docs/Images/01.png" width="250" style="border: 1px solid black;">
-<img src="https://github.com/limadeveloper/iOS-Search/blob/master/Docs/Images/02.png" width="250" style="border: 1px solid black;">
-<img src="https://github.com/limadeveloper/iOS-Search/blob/master/Docs/Images/03.png" width="250" style="border: 1px solid black;">
-<img src="https://github.com/limadeveloper/iOS-Search/blob/master/Docs/Images/04.png" width="250" style="border: 1px solid black;">
+<img src="https://github.com/limadeveloper/iOS-Search/blob/master/Docs/Images/01.png" width="250">
+<img src="https://github.com/limadeveloper/iOS-Search/blob/master/Docs/Images/02.png" width="250">
+<img src="https://github.com/limadeveloper/iOS-Search/blob/master/Docs/Images/03.png" width="250">
 </p>
 <br>
